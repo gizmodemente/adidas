@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: itineraries
+  profiles:
+    active: ${ENVIRONMENT:local}
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+      WRITE_DATES_AS_TIMESTAMPS: false

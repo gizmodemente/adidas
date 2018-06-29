@@ -1,0 +1,11 @@
+task ('deployJarFiles', type: Copy) {
+    dependsOn ':zuul:build'
+    dependsOn ':eureka-server:build'
+    dependsOn ':connections:build'
+    dependsOn ':itineraries:build'
+    group 'Deployment'
+    description 'Task to deploy files in docker folder'
+    from "zuul/build/libs", "eureka-server/build/libs", "connections/build/libs", "itineraries/build/libs"
+    include "*.jar"
+    into "docker-service/target"
+}

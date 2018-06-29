@@ -1,0 +1,4 @@
+include 'zuul'
+include 'itineraries'
+include 'connections'
+include 'eureka-server'

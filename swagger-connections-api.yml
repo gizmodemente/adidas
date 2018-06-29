@@ -1,0 +1,212 @@
+swagger: '2.0'
+info:
+  description: Api Documentation
+  version: '1.0'
+  title: Api Documentation
+  termsOfService: 'urn:tos'
+  contact: 
+    email: "fdelosriosfernandez@gmail.com"
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+host: 'localhost:8080'
+basePath: /
+tags:
+  - name: connections-controller
+    description: Controller to manage connection objects. A connection represents a link between two cities.
+  - name: city-controller
+    description: This controller returns the info from any connection thah have origin in a city.
+paths:
+  '/cities/v1/{city}':
+    get:
+      tags:
+        - city-controller
+      summary: Obtain the connections that have source in this city
+      operationId: getCityUsingGET
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: city
+          in: path
+          description: city
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/City'
+        '401':
+          description: Unauthorized
+  /connections/v1:
+    get:
+      tags:
+        - connections-controller
+      summary: Obtain all connections from database.
+      operationId: getAllConnectionsUsingGET
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK. Returns a list with all connections.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Connection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - connections-controller
+      summary: Create a new connection between two cities.
+      operationId: createAConnectionUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: connection
+          description: connection
+          required: true
+          schema:
+            $ref: '#/definitions/Connection'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Connection'
+        '201':
+          description: Created. Returns the object.
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict. Connection between the cities already exists
+  '/connections/v1/{idConn}':
+    get:
+      tags:
+        - connections-controller
+      summary: Obtain a connection by Id
+      operationId: getAConnectionUsingGET
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: idConn
+          in: path
+          description: Id of connection
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Connection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - connections-controller
+      summary: Modify a connection by Id.
+      operationId: modifyAConnectionUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: connection
+          description: connection
+          required: true
+          schema:
+            $ref: '#/definitions/Connection'
+        - name: idConn
+          in: path
+          description: Id of connection to modify
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Connection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - connections-controller
+      summary: Delete a connection by Id
+      operationId: deleteAConnectionUsingDELETE
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: idConn
+          in: path
+          description: Id of connection to delete
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+definitions:
+  LocalTime:
+    type: object
+    properties:
+      hour:
+        type: integer
+        format: int32
+      minute:
+        type: integer
+        format: int32
+      nano:
+        type: integer
+        format: int32
+      second:
+        type: integer
+        format: int32
+  Connection:
+    type: object
+    properties:
+      arrivalTime:
+        $ref: '#/definitions/LocalTime'
+      city:
+        type: string
+      departureTime:
+        $ref: '#/definitions/LocalTime'
+      destination:
+        type: string
+      id:
+        type: string
+  City:
+    type: object
+    properties:
+      city:
+        type: string
+      connections:
+        type: array
+        items:
+          $ref: '#/definitions/CityConnection'
+  CityConnection:
+    type: object
+    properties:
+      arrivalTime:
+        $ref: '#/definitions/LocalTime'
+      departureTime:
+        $ref: '#/definitions/LocalTime'
+      destination:
+        type: string

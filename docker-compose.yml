@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  mongo:
+    build: docker-mongo
+  eureka:
+    build:
+      context: docker-service
+      args:
+        - filename=eureka-server-1.0.jar
+  connections:
+    build:
+      context: docker-service
+      args:
+        - filename=connections-1.0.jar
+  itineraries:
+    build:
+      context: docker-service
+      args:
+        - filename=itineraries-1.0.jar
+  zuul:
+    build:
+      context: docker-service
+      args:
+        - filename=zuul-1.0.jar
+    ports:
+      - "8880:8080"
+

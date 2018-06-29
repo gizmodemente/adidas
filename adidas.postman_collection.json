@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "e38153d2-e238-43bb-bfc6-11a32fdb93c9",
+		"name": "adidas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all connections",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8880/connections/connections/v1",
+					"host": [
+						"localhost"
+					],
+					"port": "8880",
+					"path": [
+						"connections",
+						"connections",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Connection",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"city\": \"Madrid\",\n  \"destination\": \"Valencia\",\n  \"departureTime\": \"16:30:00\",\n  \"arrivalTime\": \"16:45:00\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8880/connections/connections/v1",
+					"host": [
+						"localhost"
+					],
+					"port": "8880",
+					"path": [
+						"connections",
+						"connections",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get City Info",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "adidas",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "adidas",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8880/connections/cities/v1/Madrid",
+					"host": [
+						"localhost"
+					],
+					"port": "8880",
+					"path": [
+						"connections",
+						"cities",
+						"v1",
+						"Madrid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calculate Itineraries",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "adidas",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "adidas",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8880/itineraries/itineraries/v1/Madrid?destination=Barcelona",
+					"host": [
+						"localhost"
+					],
+					"port": "8880",
+					"path": [
+						"itineraries",
+						"itineraries",
+						"v1",
+						"Madrid"
+					],
+					"query": [
+						{
+							"key": "destination",
+							"value": "Barcelona"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a connection",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8880/connections/connections/v1/5b33eafc04ba1b7d351fcbd0",
+					"host": [
+						"localhost"
+					],
+					"port": "8880",
+					"path": [
+						"connections",
+						"connections",
+						"v1",
+						"5b33eafc04ba1b7d351fcbd0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify a Connection",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"city\": \"Madrid\",\n  \"destination\": \"Valencia\",\n  \"departureTime\": \"16:30:00\",\n  \"arrivalTime\": \"19:45:50\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8880/connections/connections/v1/5b368682a7b11b0007c7ff56",
+					"host": [
+						"localhost"
+					],
+					"port": "8880",
+					"path": [
+						"connections",
+						"connections",
+						"v1",
+						"5b368682a7b11b0007c7ff56"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
